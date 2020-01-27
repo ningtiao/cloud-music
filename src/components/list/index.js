@@ -29,3 +29,35 @@ function RemcommendList(props) {
 }
 
 export default React.memo (RemcommendList);
+// function myInstanceof(left, right) {
+//   if(typeof left != 'object' || left != null) return false
+//   let proto = Object.getPrototypeOf(left)
+//   while(true) {
+//     if(proto == null) return false
+//     if(proto == right.prototype) return false
+//     proto = Object.getPrototypeOf(proto)
+//   }
+// }
+// Array.prototype.map = function(callbackFn,thisArg) {
+//   if(this == null || this == undefined) {
+//     throw new TypeError('cannot read property "map" of null or undefined')
+//   }
+
+//   if(Object.prototype.toString.call(callbackFn) != '[object Function]') {
+//     throw new TypeError(callbackFn + 'is not Function')
+//   }
+
+//   let O = Object(this)
+//   let T = thisArg
+
+//   let len = O.length >>> 0
+//   let A = new Array(len)
+//   for(let k =0;k<len;k++) {
+//     if(k in O) {
+//       let kValue = O[k]
+//       let mappendValue = callbackFn.call(T, kValue, k, O);
+//       A[k] = mappendValue
+//     }
+//   }
+//   return A
+//  }
