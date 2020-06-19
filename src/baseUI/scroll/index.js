@@ -114,14 +114,15 @@ Scroll.defaultProps = {
 
 Scroll.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizental']),
-  refresh: PropTypes.bool,
-  onScroll: PropTypes.func,
-  pullUp: PropTypes.func,
-  pullDown: PropTypes.func,
-  pullUpLoading: PropTypes.bool,
-  pullDownLoading: PropTypes.bool,
-  bounceTop: PropTypes.bool,//是否支持向上吸顶
-  bounceBottom: PropTypes.bool//是否支持向上吸顶
+  click: true, // 是否支持点击
+  refresh: PropTypes.bool, // 是否刷新
+  onScroll: PropTypes.func, // 滑动触发的回调函数
+  pullUp: PropTypes.func, // 上拉加载逻辑
+  pullDown: PropTypes.func, // 下拉加载逻辑
+  pullUpLoading: PropTypes.bool, // 是否显示上拉loading动画
+  pullDownLoading: PropTypes.bool, // 是否显示下拉loading 动画
+  bounceTop: PropTypes.bool, // 是否支持向上吸顶
+  bounceBottom: PropTypes.bool // 是否支持向上吸顶
 };
 
 export default Scroll;
