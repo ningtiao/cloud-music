@@ -114,7 +114,6 @@ Scroll.defaultProps = {
 
 Scroll.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizental']),
-  click: true, // 是否支持点击
   refresh: PropTypes.bool, // 是否刷新
   onScroll: PropTypes.func, // 滑动触发的回调函数
   pullUp: PropTypes.func, // 上拉加载逻辑
