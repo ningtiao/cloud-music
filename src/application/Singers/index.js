@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import Horizen from '../../baseUI/horizen-item/index';
 import { categoryTypes, alphaTypes } from '../../api/config';
 import Scroll from '../../baseUI/scroll';
+import { connect } from 'react-redux';
 import { 
   NavContainer,
   ListContainer,
   List,
   ListItem
 } from "./style";
+import {
+  getSingerList,
+  getHotSingerList,
+  changeEnterLoading,
+  changePageCount,
+  changePullDownLoading,
+  changePullUpLoading,
+  refreshMoreSingerList,
+  refreshMoreHotSingerList
+} from './store/actionCreators';
 function Singers() {
   let [category, setCategory] = useState('');
   let [alpha, setAlpha] = useState('');

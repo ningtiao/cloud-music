@@ -58,7 +58,7 @@ export const getHotSingerList = () => {
 }
 
 // 加载更多热门歌手
-export const refreshMoreHoySingerList = () => {
+export const refreshMoreHotSingerList = () => {
   return (dispatch, getState) => {
     const pageCount = getState().getIn(['singers', 'pageCount']);
     const singerList = getState.getIn(['singer', 'singerList']).toJS();
