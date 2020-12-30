@@ -19,16 +19,23 @@ import {
   refreshMoreSingerList,
   refreshMoreHotSingerList
 } from './store/actionCreators';
-function Singers() {
+
+function Singers(props) {
   let [category, setCategory] = useState('');
   let [alpha, setAlpha] = useState('');
 
+  // const { singerList } = props;
+
+  const { updateDispatch } = props;
+
   let handleUpdateAlpha = (val) => {
     setAlpha(val)
+    updateDispatch(category, val);
   }
 
   let handleUpdateCategory = (val) => {
     setCategory(val)
+    updateDispatch(category, alpha)
   }
 
   const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
@@ -79,4 +86,45 @@ function Singers() {
   )
 }
 
-export default React.memo(Singers)
+const mapStateToProps = (state) => ({
+  singerList: state.getIn(['singers', 'singerList']),
+  enterLoading: state.getIn(['singers', 'enterLoading']),
+  pullUploading: state.getIn(['singers', 'pullUploading']),
+  pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
+  pageCount: state.getIn(['singers', 'pageCount'])
+})
+
+const mapDispatchProps = (dispatch) => {
+  return {
+    getHotSingerDispatch() {
+      dispatch(getHotSingerList());
+    },
+    updateDispatch(category, alpha) {
+      dispatch(changePageCount(0)); // 由于改变了分类 所以pageCount 清零
+      dispatch(changeEnterLoading(true)) // loading 现在控制逻辑，效果实现放到下一节
+      dispatch(getSingerList(category, alpha));
+    },
+    // 滑最底部刷新部分处理
+    pullRefreshDispatch(category, alpha, hot, count) {
+      dispatch(changePullUpLoading(true));
+      dispatch(changePageCount(count + 1));
+      if (hot) {
+        dispatch(refreshMoreHotSingerList())
+      } else {
+        dispatch(refreshMoreSingerList(category, alpha))
+      }
+    },
+    //顶部下拉刷新
+    pullDownRefreshDispatch(category, alpha) {
+      dispatch(changePullDownLoading(true));
+      dispatch(changePageCount(0));//属于重新获取数据
+      if(category === '' && alpha === ''){
+        dispatch(getHotSingerList());
+      } else {
+        dispatch(getSingerList(category, alpha));
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(React.memo(React.memo(Singers)));
